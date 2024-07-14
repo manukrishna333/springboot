@@ -1,11 +1,9 @@
+FROM maven:3.8.4-openjdk-17 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src src
+RUN mvn clean package
 FROM openjdk:17
-VOLUME /tmp
-ARG REGION_ARG=us-east-2
-ARG ACCESS_ARG
-ARG SECRET_ARG
-ENV AWS_REGION=$REGION_ARG
-ENV AWS_ACCESS_KEY=$ACCESS_ARG
-ENV AWS_SECRET_KEY=$SECRET_ARG
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8080
+COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar demo-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","demo-0.0.1-SNAPSHOT.jar"]
