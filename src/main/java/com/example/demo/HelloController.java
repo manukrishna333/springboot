@@ -10,7 +10,7 @@ public class HelloController {
 
     @GetMapping
     public String sayHello() {
-        return "Hola! Welcome to spring Boot";
+        return "Hola! Welcome to spring Boot - Main";
     }
 
 }
