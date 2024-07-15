@@ -1,9 +1,9 @@
 {
-    "family": "test-definition",
+    "family": "test-definition-dev",
     "containerDefinitions": [
         {
             "name": "springboot",
-            "image": "/springboot:53b1b1a27275898b1b3b6388e8d56ffa0f5c093e",
+            "image": "543249538943.dkr.ecr.us-east-2.amazonaws.com/springbootdev:latest",
             "cpu": 0,
             "portMappings": [
                 {
@@ -20,6 +20,16 @@
             "mountPoints": [],
             "volumesFrom": [],
             "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/test-definition-dev",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
             "systemControls": []
         }
     ],
@@ -30,7 +40,7 @@
         "FARGATE"
     ],
     "cpu": "1024",
-    "memory": "2048",
+    "memory": "3072",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
